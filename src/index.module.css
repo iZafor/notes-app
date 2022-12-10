@@ -1,0 +1,137 @@
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+      format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --main-bg-color: #181d31;
+}
+
+body {
+  background-color: var(--main-bg-color);
+}
+
+.main,
+.main input {
+  font-size: 16px;
+  line-height: 24px;
+  color: #353740;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.main h3 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: bold;
+  color: #202123;
+  margin: 16px 0 40px;
+}
+.main form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+.main textarea[type="text"] {
+  padding: 12px 16px;
+  border: 1px solid #10a37f;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.main ::placeholder {
+  color: #8e8ea0;
+  opacity: 1;
+}
+.main input[type="submit"] {
+  padding: 12px 0;
+  color: #fff;
+  font-weight: bold;
+  background-color: #10a37f;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.main input[type="submit"]:hover {
+  background-color: #18ad88;
+}
+
+.main .contentsDiv {
+  /* border: 1px solid #10a37f; */
+  position: absolute;
+  top: 220px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  margin: 40px 20px 0px 20px;
+}
+
+.main .contentsDiv .content {
+  background-color: #2e2e31;
+  color: #dfdfde;
+  opacity: 0.9;
+  font-size: 20px;
+  padding: 0 8px;
+  border-radius: 4px;
+  /* overflow: scroll;   */
+  margin-bottom: 40px;
+  text-align: justify;
+  width: 98%;
+}
+
+.main .contentsDiv .content .mainContent {
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+.main .switchMode {
+  position: absolute;
+  top: 23px;
+  right: 10px;
+  cursor: pointer;
+  background-color: var(--main-bg-color);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.main .lightModeIcon {
+  height: 40px;
+}
+
+.main .lightModeIcon path {
+  fill: #fff;
+}
+
+.main .darkModeIcon {
+  position: relative;
+  right: 10px;
+  height: 40px;
+}
+
+.main .clearBtn {
+  width: 95px;
+  position: absolute;
+  right: 120px;
+  top: 20px;
+  height: 45px;
+}
