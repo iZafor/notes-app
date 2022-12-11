@@ -48,6 +48,14 @@ body {
   flex-direction: column;
   width: 320px;
 }
+
+.main input[type="text"] {
+  padding: 12px 16px;
+  border: 1px solid #10a37f;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
 .main textarea[type="text"] {
   padding: 12px 16px;
   border: 1px solid #10a37f;
@@ -75,8 +83,9 @@ body {
 
 .main .contentsDiv {
   /* border: 1px solid #10a37f; */
+  color: #dfdfde;
   position: absolute;
-  top: 220px;
+  top: 260px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
@@ -87,7 +96,6 @@ body {
 
 .main .contentsDiv .content {
   background-color: #2e2e31;
-  color: #dfdfde;
   opacity: 0.9;
   font-size: 20px;
   padding: 0 8px;
@@ -101,6 +109,14 @@ body {
 .main .contentsDiv .content .mainContent {
   font-weight: normal;
   line-height: 1.5;
+}
+
+.main .contentsDiv .content .mainContentTitle {
+  color: #dfdfde;
+  text-align: center;
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
 }
 
 .main .switchMode {

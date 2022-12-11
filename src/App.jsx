@@ -1,24 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./index.module.css";
 
 import { ReactComponent as LightModeIcon } from "./assets/light.svg";
 import { ReactComponent as DarkModeIcon } from "./assets/dark.svg";
 
+import { addDataToDB, getDataFromDB } from "./api";
+
 const App = () => {
+  const [noteTitle, setNoteTitle] = useState("");
   const [currNote, setCurrNote] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [mode, setMode] = useState("dark");
 
-  const handleChange = (e) => {
+  const handleNoteTitleChange = (e) => {
+    const title = e.target.value;
+    setNoteTitle(title);
+  };
+
+  const handleCurrNoteChange = (e) => {
     const text = e.target.value;
     setCurrNote(text);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setAllNotes((prev) => [...prev, currNote]);
-    setCurrNote("");
+    setAllNotes((prev) => [
+      ...prev,
+      {
+        title: noteTitle,
+        content: currNote,
+      },
+    ]);
+    await addDataToDB({
+      title: noteTitle,
+      content: currNote,
+    }).then(() => {
+      setNoteTitle("");
+      setCurrNote("");
+    });
   };
 
   const clearAll = (e) => {
@@ -42,15 +62,30 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    const getFetchedData = async () => {
+      await getDataFromDB().then((result) => {
+        result?.length && setAllNotes([...result]);
+      });
+    };
+    getFetchedData();
+  }, []);
+
   return (
     <div className={styles.main}>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="note title"
+          value={noteTitle}
+          onChange={handleNoteTitleChange}
+        />
         <textarea
           type="text"
-          placeholder="enter your note"
+          placeholder="your note"
           value={currNote}
           rows="5"
-          onChange={handleChange}
+          onChange={handleCurrNoteChange}
         />
         <input type="submit" value="Add Note" />
       </form>
@@ -58,16 +93,19 @@ const App = () => {
         {allNotes.map((inputContent, idx) => (
           <div className={styles.content} key={idx}>
             <p>{idx + 1}.</p>
-            <p className={styles.mainContent}>{inputContent}</p>
+            <h3 className={styles.mainContentTitle}>
+              {inputContent.title.toUpperCase()}
+            </h3>
+            <p className={styles.mainContent}>{inputContent.content}</p>
           </div>
         ))}
       </div>
-      <input
+      {/* <input
         className={styles.clearBtn}
         type="submit"
         value="Clear all"
         onClick={clearAll}
-      />
+      /> */}
       <button className={styles.switchMode} onClick={switchMode}>
         {mode == "dark" ? (
           <LightModeIcon className={styles.lightModeIcon} />
