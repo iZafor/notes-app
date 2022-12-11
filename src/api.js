@@ -1,5 +1,5 @@
 // const apiUrl = "http://localhost:8888";
-const apiUrl = "https://notes-app-database.vercel.app/";
+const apiUrl = "https://notes-app-database.vercel.app";
 
 export const getDataFromDB = async () => {
     return await fetch(`${apiUrl}`)
