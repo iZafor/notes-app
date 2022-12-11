@@ -106,6 +106,19 @@ body {
   width: 98%;
 }
 
+.main .contentsDiv .content .deleteBtn {
+  position: relative;
+  left: 90%;
+  bottom: 7%;
+  cursor: pointer;
+}
+
+.main .contentsDiv .content .deleteBtn img {
+  height: 40px;
+  margin: 0;
+  padding: 0;
+}
+
 .main .contentsDiv .content .mainContent {
   font-weight: normal;
   line-height: 1.5;
@@ -121,10 +134,10 @@ body {
 
 .main .switchMode {
   position: absolute;
-  top: 23px;
-  right: 10px;
+  top: 21px;
+  right: 45px;
   cursor: pointer;
-  background-color: var(--main-bg-color);
+  /* background-color: var(--main-bg-color); */
   margin: 0;
   padding: 0;
   border: none;
@@ -132,6 +145,10 @@ body {
 
 .main .lightModeIcon {
   height: 40px;
+  position: relative;
+  right: 10px;
+  border: 3px solid #dfdfde;
+  border-radius: 50%;
 }
 
 .main .lightModeIcon path {
@@ -142,6 +159,8 @@ body {
   position: relative;
   right: 10px;
   height: 40px;
+  border: 3px solid #000;
+  border-radius: 50%;
 }
 
 .main .clearBtn {

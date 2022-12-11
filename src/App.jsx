@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import uniqid from "uniqid";
 
 import styles from "./index.module.css";
 
-import { ReactComponent as LightModeIcon } from "./assets/light.svg";
-import { ReactComponent as DarkModeIcon } from "./assets/dark.svg";
+import LightModeIcon from "./components/light-mode-icon.component";
+import DarkModeIcon from "./components/dark-mode-icon.component";
+import DeleteIcon from "./components/delete-icon.component";
 
-import { addDataToDB, getDataFromDB } from "./api";
+import { addDataToDB, getDataFromDB, deleteOne, deleteAll } from "./api";
 
 const App = () => {
   const [noteTitle, setNoteTitle] = useState("");
@@ -25,14 +27,18 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const uid = uniqid();
+
     setAllNotes((prev) => [
       ...prev,
       {
+        __id: uid,
         title: noteTitle,
         content: currNote,
       },
     ]);
     await addDataToDB({
+      __id: uid,
       title: noteTitle,
       content: currNote,
     }).then(() => {
@@ -41,15 +47,24 @@ const App = () => {
     });
   };
 
-  const clearAll = (e) => {
+  const clearAll = async (e) => {
     e.preventDefault();
-    setAllNotes([]);
-    setCurrNote("");
+    await deleteAll().then(() => {
+      setAllNotes([]);
+      setCurrNote("");
+    });
+  };
+
+  const clearOne = async (e) => {
+    const __id = e.currentTarget.id;
+    await deleteOne(__id).then(() => {
+      const leftNotes = allNotes.filter((note) => note.__id != __id);
+      setAllNotes([...leftNotes]);
+    });
   };
 
   const changeBgColor = (color) => {
     document.querySelector("body").style.backgroundColor = `${color}`;
-    document.querySelector("button").style.backgroundColor = `${color}`;
   };
 
   const switchMode = () => {
@@ -93,6 +108,13 @@ const App = () => {
         {allNotes.map((inputContent, idx) => (
           <div className={styles.content} key={idx}>
             <p>{idx + 1}.</p>
+            <span
+              id={inputContent.__id}
+              className={styles.deleteBtn}
+              onClick={clearOne}
+            >
+              <DeleteIcon />
+            </span>
             <h3 className={styles.mainContentTitle}>
               {inputContent.title.toUpperCase()}
             </h3>
@@ -100,19 +122,19 @@ const App = () => {
           </div>
         ))}
       </div>
-      {/* <input
+      <input
         className={styles.clearBtn}
         type="submit"
         value="Clear all"
         onClick={clearAll}
-      /> */}
-      <button className={styles.switchMode} onClick={switchMode}>
+      />
+      <div className={styles.switchMode} onClick={switchMode}>
         {mode == "dark" ? (
-          <LightModeIcon className={styles.lightModeIcon} />
+          <LightModeIcon cssClassName={styles.lightModeIcon} />
         ) : (
-          <DarkModeIcon className={styles.darkModeIcon} />
+          <DarkModeIcon cssClassName={styles.darkModeIcon} />
         )}
-      </button>
+      </div>
     </div>
   );
 };
