@@ -115,7 +115,7 @@ body {
   /* overflow: scroll;   */
   margin-bottom: 40px;
   text-align: justify;
-  width: 98%;
+  width: 97%;
 }
 
 .main .contentsDiv .content .contentTopBar {
@@ -262,11 +262,20 @@ body {
   }
 
   .main .contentsDiv {
-    margin: 40px 2px 0 2px;
+    margin: 40px 0 0 0;
     grid-template-columns: 1fr;
   }
 
   .main .contentsDiv .content {
     padding: 0 5px;
+  }
+
+  .main .contentsDiv .content .mainContentTitle {
+    font-size: 18px;
+  }
+
+  .main .contentsDiv .content .mainContent {
+    font-size: 14px;
+    padding: 0 3px;
   }
 }
