@@ -16,6 +16,10 @@
 
 :root {
   --main-bg-color: #181d31;
+  --font-color: #dfdfde;
+  --content-bg-color: #2e2e31;
+  --mode-switch-btn-hover-bg-color: #dfdfde;
+  --delete-btn-hover-bg-color:#7b1a34;
 }
 
 body {
@@ -47,6 +51,15 @@ body {
   display: flex;
   flex-direction: column;
   width: 320px;
+}
+
+.main .topBar {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 26px;
+  right: 16px;
+  width: 150px;
 }
 
 .main input[type="text"] {
@@ -83,7 +96,7 @@ body {
 
 .main .contentsDiv {
   /* border: 1px solid #10a37f; */
-  color: #dfdfde;
+  color: var(--font-color);
   position: absolute;
   top: 260px;
   display: grid;
@@ -95,7 +108,7 @@ body {
 }
 
 .main .contentsDiv .content {
-  background-color: #2e2e31;
+  background-color: var(--content-bg-color);
   opacity: 0.9;
   font-size: 20px;
   padding: 0 8px;
@@ -106,11 +119,21 @@ body {
   width: 98%;
 }
 
+.main .contentsDiv .content .contentTopBar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .main .contentsDiv .content .deleteBtn {
   position: relative;
-  left: 90%;
-  bottom: 7%;
+  top: 5px;
   cursor: pointer;
+  height: 40px;
+}
+
+.main .contentsDiv .content .deleteBtn :hover{
+  border-radius: 4px;
+  /* background-color: var(--delete-btn-hover-bg-color); */
 }
 
 .main .contentsDiv .content .deleteBtn img {
@@ -125,7 +148,7 @@ body {
 }
 
 .main .contentsDiv .content .mainContentTitle {
-  color: #dfdfde;
+  color: var(--font-color);
   text-align: center;
   font-size: 24px;
   margin: 0;
@@ -133,40 +156,57 @@ body {
 }
 
 .main .switchMode {
-  position: absolute;
-  top: 21px;
-  right: 45px;
+  position: relative;
+  top: 3px;
+  height: 40px;
   cursor: pointer;
-  /* background-color: var(--main-bg-color); */
   margin: 0;
   padding: 0;
-  border: none;
+  border-radius: 50%;
+}
+
+.main .switchMode :hover {
+  opacity: .85;
 }
 
 .main .lightModeIcon {
   height: 40px;
-  position: relative;
-  right: 10px;
-  border: 3px solid #dfdfde;
-  border-radius: 50%;
-}
-
-.main .lightModeIcon path {
-  fill: #fff;
+  /* background-color: #dfdfde; */
+  /* position: relative; */
+  /* right: 10px; */
+  /* border: 3px solid #dfdfde; */
+  /* border-radius: 50%; */
 }
 
 .main .darkModeIcon {
-  position: relative;
-  right: 10px;
   height: 40px;
-  border: 3px solid #000;
-  border-radius: 50%;
+  /* background-color: #dfdfde; */
+  /* border: 3px solid #000; */
+  /* border-radius: 50%; */
 }
 
 .main .clearBtn {
   width: 95px;
-  position: absolute;
-  right: 120px;
-  top: 20px;
   height: 45px;
+}
+
+
+@media only screen and (max-width: 674px) {
+  .main {
+    position: relative;
+    top: 40px;
+  }
+
+  .main form{
+    width: 100%;
+  }
+
+  .main .topBar {
+    top: -36px;
+    right: -5px;
+  }
+
+  .main .contentsDiv {
+    margin: 40px 3px 0 2px;
+  }
 }

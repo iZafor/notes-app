@@ -9,6 +9,23 @@ import DeleteIcon from "./components/delete-icon.component";
 
 import { addDataToDB, getDataFromDB, deleteOne, deleteAll } from "./api";
 
+const colorPalatte = {
+  darkMode: {
+    mainBgColor: "#181d31",
+    fontColor: "#dfdfde",
+    contentBgColor: "#2e2e31",
+    modeSwitchBtnHoverBgColor: "#7b1a34",
+    deleteBtnHoverBgColor: "#dfdfde",
+  },
+  lightMode: {
+    mainBgColor: "#fff",
+    fontColor: "#000",
+    contentBgColor: "#f0f8ff",
+    modeSwitchBtnHoverBgColor: "#000",
+    deleteBtnHoverBgColor: "",
+  },
+};
+
 const App = () => {
   const [noteTitle, setNoteTitle] = useState("");
   const [currNote, setCurrNote] = useState("");
@@ -63,17 +80,20 @@ const App = () => {
     });
   };
 
-  const changeBgColor = (color) => {
-    document.querySelector("body").style.backgroundColor = `${color}`;
+  const changeColors = (palatte) => {
+    const r = document.querySelector(":root");
+    r.style.setProperty("--main-bg-color", palatte.mainBgColor);
+    r.style.setProperty("--font-color", palatte.fontColor);
+    r.style.setProperty("--content-bg-color", palatte.contentBgColor);
   };
 
   const switchMode = () => {
     if (mode == "dark") {
       setMode("light");
-      changeBgColor("#fff");
+      changeColors(colorPalatte.lightMode);
     } else {
       setMode("dark");
-      changeBgColor("#181d31");
+      changeColors(colorPalatte.darkMode);
     }
   };
 
@@ -107,14 +127,16 @@ const App = () => {
       <div className={styles.contentsDiv}>
         {allNotes.map((inputContent, idx) => (
           <div className={styles.content} key={idx}>
-            <p>{idx + 1}.</p>
-            <span
-              id={inputContent.__id}
-              className={styles.deleteBtn}
-              onClick={clearOne}
-            >
-              <DeleteIcon />
-            </span>
+            <div className={styles.contentTopBar}>
+              <p>{idx + 1}.</p>
+              <span
+                id={inputContent.__id}
+                className={styles.deleteBtn}
+                onClick={clearOne}
+              >
+                <DeleteIcon />
+              </span>
+            </div>
             <h3 className={styles.mainContentTitle}>
               {inputContent.title.toUpperCase()}
             </h3>
@@ -122,18 +144,20 @@ const App = () => {
           </div>
         ))}
       </div>
-      <input
-        className={styles.clearBtn}
-        type="submit"
-        value="Clear all"
-        onClick={clearAll}
-      />
-      <div className={styles.switchMode} onClick={switchMode}>
-        {mode == "dark" ? (
-          <LightModeIcon cssClassName={styles.lightModeIcon} />
-        ) : (
-          <DarkModeIcon cssClassName={styles.darkModeIcon} />
-        )}
+      <div className={styles.topBar}>
+        <input
+          className={styles.clearBtn}
+          type="submit"
+          value="Clear all"
+          onClick={clearAll}
+        />
+        <div className={styles.switchMode} onClick={switchMode}>
+          {mode == "dark" ? (
+            <LightModeIcon cssClassName={styles.lightModeIcon} />
+          ) : (
+            <DarkModeIcon cssClassName={styles.darkModeIcon} />
+          )}
+        </div>
       </div>
     </div>
   );
