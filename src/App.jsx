@@ -6,6 +6,7 @@ import styles from "./index.module.css";
 import LightModeIcon from "./components/light-mode-icon.component";
 import DarkModeIcon from "./components/dark-mode-icon.component";
 import DeleteIcon from "./components/delete-icon.component";
+import SuccessAlert from "./components/success-alert.component";
 
 import { addDataToDB, getDataFromDB, deleteOne, deleteAll } from "./api";
 
@@ -31,6 +32,7 @@ const App = () => {
   const [currNote, setCurrNote] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [mode, setMode] = useState("dark");
+  const [animationClass, setAnimationClass] = useState("");
 
   const handleNoteTitleChange = (e) => {
     const title = e.target.value;
@@ -42,26 +44,51 @@ const App = () => {
     setCurrNote(text);
   };
 
+  const addVisibilityClass = () => {
+    document
+      .querySelector("#alertBox")
+      .style.setProperty("visibility", "visible");
+  };
+
+  const removeVisibilityClass = () => {
+    document
+      .querySelector("#alertBox")
+      .style.setProperty("visibility", "hidden");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const uid = uniqid();
 
-    setAllNotes((prev) => [
-      ...prev,
-      {
+    if (noteTitle.length > 0 && currNote.length > 0) {
+      setAllNotes((prev) => [
+        ...prev,
+        {
+          __id: uid,
+          title: noteTitle,
+          content: currNote,
+        },
+      ]);
+      await addDataToDB({
         __id: uid,
         title: noteTitle,
         content: currNote,
-      },
-    ]);
-    await addDataToDB({
-      __id: uid,
-      title: noteTitle,
-      content: currNote,
-    }).then(() => {
+      }).then(() => {
+        setNoteTitle("");
+        setCurrNote("");
+    
+        /*Showing animated message*/
+        addVisibilityClass();
+        setAnimationClass(styles.animate);
+        setTimeout(() => {
+          removeVisibilityClass();
+          setAnimationClass("");
+        }, 5000);
+      });
+    } else {
       setNoteTitle("");
       setCurrNote("");
-    });
+    }
   };
 
   const clearAll = async (e) => {
@@ -97,6 +124,10 @@ const App = () => {
     }
   };
 
+  const hideMessage = () => {
+    removeVisibilityClass();
+  };
+
   useEffect(() => {
     const getFetchedData = async () => {
       await getDataFromDB().then((result) => {
@@ -108,6 +139,14 @@ const App = () => {
 
   return (
     <div className={styles.main}>
+      <SuccessAlert
+        cssClass={styles.alert}
+        alertIconClass={styles.alertIcon}
+        crossIconClass={styles.crossIcon}
+        alertMessageClass={styles.alertMessage}
+        animationClass={animationClass}
+        hideMessage={hideMessage}
+      />
       <form onSubmit={handleSubmit}>
         <input
           type="text"

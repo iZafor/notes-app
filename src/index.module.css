@@ -19,7 +19,7 @@
   --font-color: #dfdfde;
   --content-bg-color: #2e2e31;
   --mode-switch-btn-hover-bg-color: #dfdfde;
-  --delete-btn-hover-bg-color:#7b1a34;
+  --delete-btn-hover-bg-color: #7b1a34;
 }
 
 body {
@@ -95,7 +95,6 @@ body {
 }
 
 .main .contentsDiv {
-  /* border: 1px solid #10a37f; */
   color: var(--font-color);
   position: absolute;
   top: 260px;
@@ -131,9 +130,8 @@ body {
   height: 40px;
 }
 
-.main .contentsDiv .content .deleteBtn :hover{
+.main .contentsDiv .content .deleteBtn :hover {
   border-radius: 4px;
-  /* background-color: var(--delete-btn-hover-bg-color); */
 }
 
 .main .contentsDiv .content .deleteBtn img {
@@ -166,7 +164,7 @@ body {
 }
 
 .main .switchMode :hover {
-  opacity: .85;
+  opacity: 0.85;
 }
 
 .main .lightModeIcon {
@@ -190,6 +188,46 @@ body {
   height: 45px;
 }
 
+.main .alert {
+  visibility: hidden;
+  position: absolute;
+  left: 20px;
+  display: flex;
+  column-gap: 3px;
+  background: #A8E890;
+  border-radius: 4px;
+  padding: 5px 2px 0 2px;
+  border-left: 5px solid #379237;
+}
+
+.main .animate {
+  animation: slide_in 1s ease forwards;
+}
+
+@keyframes slide_in {
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+}
+
+.main .alert img{
+  height: 30px;
+}
+
+.main .alert .alertMessage {
+  font-size: 18px;
+  padding: 4px 0;
+}
+
+.main .alert .crossIcon {
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 674px) {
   .main {
@@ -197,8 +235,25 @@ body {
     top: 40px;
   }
 
-  .main form{
+  .main form {
     width: 100%;
+  }
+
+  .main .alert {
+    top: -35px;
+    left: 0;
+    padding: 12px 1px;
+    height: 20px;
+    column-gap: 2px;
+  }
+
+  .main .alert img {
+    height: 20px;
+  }
+
+  .main .alert .alertMessage {
+    font-size: 14px;
+    padding: 0;
   }
 
   .main .topBar {
@@ -207,6 +262,11 @@ body {
   }
 
   .main .contentsDiv {
-    margin: 40px 3px 0 2px;
+    margin: 40px 2px 0 2px;
+    grid-template-columns: 1fr;
+  }
+
+  .main .contentsDiv .content {
+    padding: 0 5px;
   }
 }
