@@ -3,12 +3,15 @@ import { ReactComponent as CrossIconSvg } from "../assets/cross.svg";
 
 import styles from "/src/index.module.css";
 
-const SuccessAlert = ({animationClass}) => {
+const SuccessAlert = ({ animationClass }) => {
   return (
     <div id="alertBox" className={`${styles.alert} ${animationClass}`}>
       <OkIconSvg className={styles.alertIcon} />
       <span className={styles.alertMessage}>submisson succesfull</span>
-      <CrossIconSvg className={styles.crossIcon} onClick={removeVisibilityClass} />
+      <CrossIconSvg
+        className={styles.crossIcon}
+        onClick={removeVisibilityClass}
+      />
     </div>
   );
 };
@@ -22,16 +25,28 @@ export const addVisibilityClass = () => {
 };
 
 export const removeVisibilityClass = () => {
+  document.querySelector("#alertBox").style.setProperty("visibility", "hidden");
+};
+
+const showTotalCount = () => {
   document
-    .querySelector("#alertBox")
+    .querySelector("#totalCount")
+    .style.setProperty("visibility", "visible");
+};
+
+const hideTotalCount = () => {
+  document
+    .querySelector("#totalCount")
     .style.setProperty("visibility", "hidden");
 };
 
 export const showAlertMessage = (setAnimationClass, animate) => {
+  hideTotalCount();
   addVisibilityClass();
   setAnimationClass(animate);
   setTimeout(() => {
     removeVisibilityClass();
     setAnimationClass("");
+    showTotalCount();
   }, 5000);
 };

@@ -36,6 +36,7 @@ const App = () => {
   const [allNotes, setAllNotes] = useState([]);
   const [mode, setMode] = useState("dark");
   const [animationClass, setAnimationClass] = useState("");
+  const [totalNotes, setTotalNotes] = useState(0);
 
   const handleNoteTitleChange = (e) => {
     const title = e.target.value;
@@ -117,9 +118,14 @@ const App = () => {
     getFetchedData();
   }, []);
 
+  useEffect(() => {
+    setTotalNotes(allNotes.length);
+  }, [allNotes]);
+
   return (
     <div className={styles.main}>
       <SuccessAlert animationClass={animationClass} />
+      <p id="totalCount" className={styles.totalCount}>Total Notes {totalNotes}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
