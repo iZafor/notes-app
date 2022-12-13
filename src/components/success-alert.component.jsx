@@ -1,5 +1,5 @@
-import { ReactComponent as OkIconSvg } from "/public/ok.svg";
-import { ReactComponent as CrossIconSvg } from "/public/cross.svg";
+import { ReactComponent as OkIconSvg } from "../assets/ok.svg";
+import { ReactComponent as CrossIconSvg } from "../assets/cross.svg";
 
 import styles from "/src/index.module.css";
 

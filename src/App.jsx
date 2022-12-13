@@ -3,9 +3,9 @@ import uniqid from "uniqid";
 
 import styles from "./index.module.css";
 
-import { ReactComponent as LightModeIcon } from "/public/sun.svg";
-import { ReactComponent as DarkModeIcon } from "/public/moon.svg";
-import { ReactComponent as DeleteIcon } from "/public/bin.svg";
+import { ReactComponent as LightModeIcon } from "./assets/sun.svg";
+import { ReactComponent as DarkModeIcon } from "./assets/moon.svg";
+import { ReactComponent as DeleteIcon } from "./assets/bin.svg";
 
 import SuccessAlert, {
   showAlertMessage,
