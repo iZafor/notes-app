@@ -178,7 +178,7 @@ body {
 }
 
 .main .alert {
-  visibility: visible;
+  visibility: hidden;
   position: absolute;
   left: 20px;
   display: flex;
