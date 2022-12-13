@@ -3,10 +3,13 @@ import uniqid from "uniqid";
 
 import styles from "./index.module.css";
 
-import LightModeIcon from "./components/light-mode-icon.component";
-import DarkModeIcon from "./components/dark-mode-icon.component";
-import DeleteIcon from "./components/delete-icon.component";
-import SuccessAlert from "./components/success-alert.component";
+import { ReactComponent as LightModeIcon } from "/public/sun.svg";
+import { ReactComponent as DarkModeIcon } from "/public/moon.svg";
+import { ReactComponent as DeleteIcon } from "/public/bin.svg";
+
+import SuccessAlert, {
+  showAlertMessage,
+} from "./components/success-alert.component";
 
 import { addDataToDB, getDataFromDB, deleteOne, deleteAll } from "./api";
 
@@ -44,18 +47,6 @@ const App = () => {
     setCurrNote(text);
   };
 
-  const addVisibilityClass = () => {
-    document
-      .querySelector("#alertBox")
-      .style.setProperty("visibility", "visible");
-  };
-
-  const removeVisibilityClass = () => {
-    document
-      .querySelector("#alertBox")
-      .style.setProperty("visibility", "hidden");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const uid = uniqid();
@@ -76,14 +67,7 @@ const App = () => {
       }).then(() => {
         setNoteTitle("");
         setCurrNote("");
-    
-        /*Showing animated message*/
-        addVisibilityClass();
-        setAnimationClass(styles.animate);
-        setTimeout(() => {
-          removeVisibilityClass();
-          setAnimationClass("");
-        }, 5000);
+        showAlertMessage(setAnimationClass, styles.animate);
       });
     } else {
       setNoteTitle("");
@@ -124,10 +108,6 @@ const App = () => {
     }
   };
 
-  const hideMessage = () => {
-    removeVisibilityClass();
-  };
-
   useEffect(() => {
     const getFetchedData = async () => {
       await getDataFromDB().then((result) => {
@@ -139,14 +119,7 @@ const App = () => {
 
   return (
     <div className={styles.main}>
-      <SuccessAlert
-        cssClass={styles.alert}
-        alertIconClass={styles.alertIcon}
-        crossIconClass={styles.crossIcon}
-        alertMessageClass={styles.alertMessage}
-        animationClass={animationClass}
-        hideMessage={hideMessage}
-      />
+      <SuccessAlert animationClass={animationClass} />
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -190,13 +163,14 @@ const App = () => {
           value="Clear all"
           onClick={clearAll}
         />
-        <div className={styles.switchMode} onClick={switchMode}>
-          {mode == "dark" ? (
-            <LightModeIcon cssClassName={styles.lightModeIcon} />
-          ) : (
-            <DarkModeIcon cssClassName={styles.darkModeIcon} />
-          )}
-        </div>
+        {mode == "dark" ? (
+          <LightModeIcon
+            onClick={switchMode}
+            className={styles.lightModeIcon}
+          />
+        ) : (
+          <DarkModeIcon onClick={switchMode} className={styles.darkModeIcon} />
+        )}
       </div>
     </div>
   );
