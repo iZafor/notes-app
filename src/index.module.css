@@ -122,7 +122,7 @@ body {
   justify-content: space-between;
 }
 
-.main .contentsDiv .content .contentTopBar svg{
+.main .contentsDiv .content .contentTopBar svg {
   height: 35px;
   width: 40px;
   padding-top: 6px;
@@ -178,12 +178,12 @@ body {
 }
 
 .main .alert {
-  visibility: hidden;
+  visibility: visible;
   position: absolute;
   left: 20px;
   display: flex;
   column-gap: 3px;
-  background: #A8E890;
+  background: #a8e890;
   border-radius: 4px;
   padding: 5px 1px;
   border-left: 5px solid #379237;
@@ -194,13 +194,13 @@ body {
 }
 
 @keyframes slide_in {
-  0%{
+  0% {
     transform: translateX(100%);
   }
-  40%{
+  40% {
     transform: translateX(-10%);
   }
-  100%{
+  100% {
     transform: translateX(0%);
   }
 }
@@ -233,10 +233,11 @@ body {
   }
 
   .main .alert {
+    width: 99%;
+    justify-content: space-between;
     top: -36px;
     left: 0;
-    padding: 8px 1px;
-    column-gap: 23px;
+    padding: 8px 0;
     z-index: 999999;
   }
 
