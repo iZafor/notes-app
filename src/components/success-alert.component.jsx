@@ -5,7 +5,7 @@ import styles from "/src/index.module.css";
 
 const SuccessAlert = ({ animationClass }) => {
   return (
-    <div id="alertBox" className={`${styles.alert} ${animationClass}`}>
+    <div id="alertBox" className={`${styles.successAlert} ${animationClass}`}>
       <OkIconSvg className={styles.alertIcon} />
       <span className={styles.alertMessage}>submisson succesfull</span>
       <CrossIconSvg

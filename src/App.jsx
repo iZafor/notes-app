@@ -10,6 +10,11 @@ import { ReactComponent as DeleteIcon } from "./assets/bin.svg";
 import SuccessAlert, {
   showAlertMessage,
 } from "./components/success-alert.component";
+import DeleteAlert, {
+  makeVisible,
+  giveStylesBodyBefore,
+  removeStylesBodyBefore,
+} from "./components/delete-alert.component";
 
 import { addDataToDB, getDataFromDB, deleteOne, deleteAll } from "./api";
 
@@ -36,6 +41,8 @@ const App = () => {
   const [allNotes, setAllNotes] = useState([]);
   const [mode, setMode] = useState("dark");
   const [animationClass, setAnimationClass] = useState("");
+  const [deleteAlertAnimationClass, setDeleteAlertAnimationClass] =
+    useState("");
   const [totalNotes, setTotalNotes] = useState(0);
 
   const handleNoteTitleChange = (e) => {
@@ -81,6 +88,7 @@ const App = () => {
     await deleteAll().then(() => {
       setAllNotes([]);
       setCurrNote("");
+      makeHidden();
     });
   };
 
@@ -109,6 +117,20 @@ const App = () => {
     }
   };
 
+  const makeHidden = () => {
+    document
+      .querySelector("#deleteAlert")
+      .style.setProperty("visibility", "hidden");
+    setDeleteAlertAnimationClass("");
+    removeStylesBodyBefore();
+  };
+
+  const showDeleteAlert = () => {
+    makeVisible();
+    setDeleteAlertAnimationClass(styles.deleteAlertAnimation);
+    giveStylesBodyBefore();
+  };
+
   useEffect(() => {
     const getFetchedData = async () => {
       await getDataFromDB().then((result) => {
@@ -125,7 +147,14 @@ const App = () => {
   return (
     <div className={styles.main}>
       <SuccessAlert animationClass={animationClass} />
-      <p id="totalCount" className={styles.totalCount}>Total Notes {totalNotes}</p>
+      <p id="totalCount" className={styles.totalCount}>
+        Total Notes {totalNotes}
+      </p>
+      <DeleteAlert
+        clearAll={clearAll}
+        animationClass={deleteAlertAnimationClass}
+        makeHidden={makeHidden}
+      />
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -167,7 +196,7 @@ const App = () => {
           className={styles.clearBtn}
           type="submit"
           value="Clear all"
-          onClick={clearAll}
+          onClick={showDeleteAlert}
         />
         {mode == "dark" ? (
           <LightModeIcon

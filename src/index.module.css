@@ -20,10 +20,27 @@
   --content-bg-color: #2e2e31;
   --mode-switch-btn-hover-bg-color: #dfdfde;
   --delete-btn-hover-bg-color: #7b1a34;
+  --body-before-bg-color: "";
+  --zindex-body-before: -99999;
+  --body-before-height: 0;
 }
 
 body {
   background-color: var(--main-bg-color);
+}
+
+body:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  content: "";
+  background: var(--body-before-bg-color);
+  z-index: var(--zindex-body-before);
+  height: var(--body-before-height);
+  width: 100%;
+  opacity: .6;
 }
 
 .main,
@@ -185,7 +202,7 @@ body {
   height: 45px;
 }
 
-.main .alert {
+.main .successAlert {
   visibility: hidden;
   position: absolute;
   left: 20px;
@@ -198,10 +215,10 @@ body {
 }
 
 .main .animate {
-  animation: slide_in 1s ease forwards;
+  animation: success_animation 1s ease forwards;
 }
 
-@keyframes slide_in {
+@keyframes success_animation {
   0% {
     transform: translateX(100%);
   }
@@ -213,21 +230,70 @@ body {
   }
 }
 
-.main .alert .alertIcon {
+.main .successAlert .alertIcon {
   height: 30px;
   width: 30px;
 }
 
-.main .alert .alertMessage {
+.main .successAlert .alertMessage {
   font-size: 18px;
   padding: 4px 0;
 }
 
-.main .alert .crossIcon {
+.main .successAlert .crossIcon {
   height: 18px;
   width: 30px;
   cursor: pointer;
   padding-top: 5px;
+}
+
+.main .deletetionAlert {
+  visibility: hidden;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  position: absolute;
+  width: 280px;
+  background: #fed049;
+  border-radius: 4px;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.main .deletetionAlert p {
+  font-size: 31px;
+}
+
+.main .deletetionAlert .deleteConfirmationButtons {
+  display: flex;
+  column-gap: 10px;
+}
+
+.main .deletetionAlert .deleteConfirmationButtons .yesButton {
+  background-color: #dc3535;
+}
+
+.main .deletetionAlert .deleteConfirmationButtons input {
+  width: 68px;
+}
+
+.deleteAlertAnimation {
+  animation: deleteAlert_animation 1s ease forwards;
+}
+
+@keyframes deleteAlert_animation {
+  0% {
+    transform: translateY(-10%);
+  }
+  40% {
+    transform: translateY(-50%);
+  }
+  60% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 @media only screen and (max-width: 674px) {
@@ -246,7 +312,7 @@ body {
     width: 100%;
   }
 
-  .main .alert {
+  .main .successAlert {
     width: 99%;
     justify-content: space-between;
     top: -36px;
@@ -255,11 +321,7 @@ body {
     z-index: 999999;
   }
 
-  .main .alert img {
-    height: 20px;
-  }
-
-  .main .alert .alertMessage {
+  .main .successAlert .alertMessage {
     padding-top: 2px;
   }
 

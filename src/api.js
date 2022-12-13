@@ -11,7 +11,7 @@ export const getDataFromDB = async () => {
 }
 
 export const addDataToDB = async (data) => {
-    await fetch(`${apiUrl}`, {
+    await fetch(`${apiUrl}/add/one`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
