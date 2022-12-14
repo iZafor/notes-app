@@ -30,12 +30,12 @@ body {
 }
 
 body:before {
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   margin: 0;
   padding: 0;
-  content: "";
   background: var(--body-before-bg-color);
   z-index: var(--zindex-body-before);
   height: var(--body-before-height);
@@ -81,10 +81,14 @@ body:before {
 
 .main .totalCount {
   position: absolute;
-  top: 4px;
+  top: 12px;
   left: 20px;
-  font-size: 28px;
-  color: var(--font-color);
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #10a37f;
+  padding: 10.5px 12px;
+  border-radius: 4px;
 }
 
 .main input[type="text"] {
@@ -186,18 +190,20 @@ body:before {
 .main .lightModeIcon {
   height: 35px;
   width: 40px;
-  padding-top: 5px;
+  padding-top: 8px;
   cursor: pointer;
 }
 
 .main .darkModeIcon {
   height: 30px;
   width: 40px;
-  padding-top: 7px;
+  padding-top: 10px;
   cursor: pointer;
 }
 
 .main .clearBtn {
+  position: relative;
+  top: 2px;
   width: 95px;
   height: 45px;
 }
@@ -253,6 +259,7 @@ body:before {
   place-items: center;
   text-align: center;
   position: absolute;
+  top: 30vh;
   width: 280px;
   background: #fed049;
   border-radius: 4px;
@@ -283,7 +290,7 @@ body:before {
 
 @keyframes deleteAlert_animation {
   0% {
-    transform: translateY(-10%);
+    transform: translateY(-200%);
   }
   40% {
     transform: translateY(-50%);
@@ -303,9 +310,9 @@ body:before {
   }
 
   .main .totalCount {
-    top: -42px;
+    top: -52px;
     left: 0;
-    font-size: 20px;
+    padding: 10.5px 15px;
   }
 
   .main form {
@@ -321,12 +328,16 @@ body:before {
     z-index: 999999;
   }
 
+  .main .deletetionAlert {
+    width: 266px;
+  }
+
   .main .successAlert .alertMessage {
     padding-top: 2px;
   }
 
   .main .topBar {
-    top: -36px;
+    top: -38px;
     right: -1px;
     column-gap: 6px;
     width: 134px;
