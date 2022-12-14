@@ -4,10 +4,10 @@ const DeleteAlert = ({ clearAll, animationClass, makeHidden }) => {
   return (
     <div
       id="deleteAlert"
-      className={`${styles.deletetionAlert} ${animationClass}`}
+      className={`${styles.deleteAlert} ${animationClass}`}
     >
       <p>Delete all?</p>
-      <div className={styles.deleteConfirmationButtons}>
+      <div className={styles.deleteConfirmButtons}>
         <input
           className={styles.yesButton}
           type="submit"

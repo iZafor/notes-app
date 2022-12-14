@@ -31,7 +31,7 @@ body {
 
 body:before {
   content: "";
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   margin: 0;
@@ -253,12 +253,12 @@ body:before {
   padding-top: 5px;
 }
 
-.main .deletetionAlert {
+.main .deleteAlert {
   visibility: hidden;
   display: grid;
   place-items: center;
   text-align: center;
-  position: absolute;
+  position: fixed;
   top: 30vh;
   width: 280px;
   background: #fed049;
@@ -267,20 +267,20 @@ body:before {
   z-index: 9999;
 }
 
-.main .deletetionAlert p {
+.main .deleteAlert p {
   font-size: 31px;
 }
 
-.main .deletetionAlert .deleteConfirmationButtons {
+.main .deleteAlert .deleteConfirmButtons {
   display: flex;
   column-gap: 10px;
 }
 
-.main .deletetionAlert .deleteConfirmationButtons .yesButton {
+.main .deleteAlert .deleteConfirmButtons .yesButton {
   background-color: #dc3535;
 }
 
-.main .deletetionAlert .deleteConfirmationButtons input {
+.main .deleteAlert .deleteConfirmButtons input {
   width: 68px;
 }
 
@@ -328,7 +328,7 @@ body:before {
     z-index: 999999;
   }
 
-  .main .deletetionAlert {
+  .main .deleteAlert {
     width: 266px;
   }
 

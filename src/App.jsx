@@ -161,6 +161,7 @@ const App = () => {
           placeholder="note title"
           value={noteTitle}
           onChange={handleNoteTitleChange}
+          autoFocus
         />
         <textarea
           type="text"
